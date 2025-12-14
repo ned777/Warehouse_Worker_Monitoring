@@ -20,5 +20,4 @@ print("Item Weight: ", item_weight)
 print("Item Aisle:", item_aisle)
 
 
-conn.commit()
 conn.close()
