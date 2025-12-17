@@ -11,15 +11,19 @@ mydb = "INSERT INTO ScanEvent (id, worker_id, item_id, timestamp, weight)"
 
 id_ScanEvent = int(input("Enter the value for id: "))
 worker_id_ScanEvent = int(input("Enter worker id: "))
-item_id_ScanEvent = int(input: ("Enter item id: "))
+item_id_ScanEvent = int(input("Enter item id: "))
+timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 weight_ScanEvent = int(input("Enter weight: "))
 
-values_ScanEvent = (id_ScanEvent, worker_id_ScanEvent, item_id_ScanEvent, weight_ScanEvent)
+values_ScanEvent = (id_ScanEvent, worker_id_ScanEvent, item_id_ScanEvent, timestamp, weight_ScanEvent)
+
+cursor.execute(mydb, values_ScanEvent)
+print(mydb)
 
 cursor.execute("SELECT Weight, AisleArea FROM Item WHERE id = ?", (item_id,))
 
 
-val_Into_ScanEvent = id
+
 
 result = cursor.fetchone()
 
