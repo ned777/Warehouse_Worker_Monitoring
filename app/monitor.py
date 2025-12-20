@@ -4,9 +4,6 @@ from datetime import datetime, timedelta
 conn = get_connection()
 cursor = conn.cursor()
 
-#2 means heavy
-#1 means normal
-#0 means less weight than expected
 
 worker_id = 1
 
@@ -21,14 +18,20 @@ rows = cursor.fetchall()
 
 scale=[]
 
-for current time minus 15
+
     
 for (weight,) in rows:
-    if 100<= weight:
-        scale.append(2)
+    if 150<= weight:
+        scale.append(4) #overload
+    elif 100<= weight and weight<150:
+        scale.append(3) #heavy
     elif 50<= weight and weight<100:
-        scale.append(1)
+        scale.append(2) #below heavy
     else:
-        scale.append(0)
+        scale.append(1) #light
     
 #calculate
+for current time minus 15
+total_load_within_15mins = sum(scale)
+
+conn.close()
