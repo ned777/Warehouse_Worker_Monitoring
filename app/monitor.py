@@ -7,7 +7,7 @@ cursor = conn.cursor()
 worker_id = 1
 
 # Time window: last 15 minutes
-time_window = datetime.now() - timedelta(minutes=15)
+time_window = (datetime.now() - timedelta(minutes=15)).strftime("%Y-%m-%d %H:%M:%S")
 
 cursor.execute(
     "SELECT Weight FROM ScanEvent WHERE worker_id = ? AND timestamp >= ?",
