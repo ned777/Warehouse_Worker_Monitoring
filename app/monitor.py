@@ -21,6 +21,8 @@ rows = cursor.fetchall()
 
 scale=[]
 
+for current time minus 15
+    
 for (weight,) in rows:
     if 100<= weight:
         scale.append(2)
@@ -29,3 +31,4 @@ for (weight,) in rows:
     else:
         scale.append(0)
     
+#calculate
