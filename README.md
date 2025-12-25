@@ -1,22 +1,54 @@
-# Warehouse Worker Monitoring (Ubuntu 24.04, LinuxMint 22.2)
+#Warehouse Worker Monitoring (Ubuntu
 
-## Overview
-Workers scan incoming items from a truck load (10 lbs to 500 lbs). Each scan includes item weight and assigned aisle. The system logs these scans and evaluates employee workload.
+##Project Architecture 
+Project Structure
+-----------------
 
-## Features
-1. Scan Logging
-2. Aisle Assignment
-3. Employee Workload Monitoring
-4. Alert System
+Warehouse_Worker_Monitoring/
+│
+├── app/
+│   ├── scanner.py        # Worker item scanning logic
+│   ├── monitor.py        # Monitoring & workload analysis
+│   ├── database.py       # SQLite connection helper
+│
+├── data/
+│   ├── database.db       # SQLite database
+│
+└── README.md
 
-#Prerequisites
-- Python 3.14
-- SQLite3 3.45.1
+##How to Run the Program
+Running the Scanner
+-------------------
+Use this to simulate item scanning:
 
-#Installation
-1. Clone or extract the folder 
-```
-git clone https://github.com/ned777/Warehouse_Worker_Monitoring.git
-cd Warehouse_Worker_Monitoring
+    python3 app/scanner.py
 
-```
+Running the Monitoring System
+-----------------------------
+Use this to analyze worker workload:
+
+    python3 app/monitor.py
+    
+##Example Output
+Sample Output (monitor.py)
+--------------------------
+Scale values: [4, 3, 2, 1]
+Total scale score within 15 mins: 10
+
+Meaning:
+4 = overload
+3 = heavy
+2 = medium
+1 = light
+
+##Future Enhancements
+Future Enhancements
+-------------------
+- AI-based anomaly detection for worker fatigue/overloading
+- Real-time dashboard for supervisors
+- Automated email/SMS alerts
+- Barcode scanner hardware interface
+
+##License
+MIT License
+
