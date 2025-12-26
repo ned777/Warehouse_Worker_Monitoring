@@ -1,4 +1,4 @@
-# Warehouse Worker Monitoring (Ubuntu
+# Warehouse Worker Monitoring (Linux – Debian/Ubuntu-based)
 
 ## Project Architecture
  
@@ -37,8 +37,8 @@ Use this to analyze worker workload:
 
 ### Sample Output (monitor.py)
 ```
-Scale values: [4, 3, 2, 1]
-Total scale score within 15 mins: 10
+	Scale values: [4, 3, 2, 1]
+	Total scale score within 15 mins: 10
 ```
 Meaning:
 4 = overload
