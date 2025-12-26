@@ -23,22 +23,23 @@ Warehouse_Worker_Monitoring/
 ### Running the Scanner
 
 Use this to simulate item scanning:
-
+```
     python3 app/scanner.py
+```
 
 ### Running the Monitoring System
 
 Use this to analyze worker workload:
-
+```
     python3 app/monitor.py
-    
+```    
 ## Example Output
 
 ### Sample Output (monitor.py)
-
+```
 Scale values: [4, 3, 2, 1]
 Total scale score within 15 mins: 10
-
+```
 Meaning:
 4 = overload
 3 = heavy
