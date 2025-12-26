@@ -4,7 +4,7 @@
  
 ### Project Structure
 
-
+```
 Warehouse_Worker_Monitoring/
 │
 ├── app/
@@ -16,6 +16,7 @@ Warehouse_Worker_Monitoring/
 │   ├── database.db       # SQLite database
 │
 └── README.md
+```
 
 ## How to Run the Program
 
