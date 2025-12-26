@@ -3,7 +3,7 @@
 ## Project Architecture
  
 ### Project Structure
------------------
+
 
 Warehouse_Worker_Monitoring/
 │
