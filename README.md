@@ -20,13 +20,13 @@ Warehouse_Worker_Monitoring/
 ## How to Run the Program
 
 ### Running the Scanner
--------------------
+
 Use this to simulate item scanning:
 
     python3 app/scanner.py
 
 ### Running the Monitoring System
------------------------------
+
 Use this to analyze worker workload:
 
     python3 app/monitor.py
@@ -34,7 +34,7 @@ Use this to analyze worker workload:
 ## Example Output
 
 ### Sample Output (monitor.py)
---------------------------
+
 Scale values: [4, 3, 2, 1]
 Total scale score within 15 mins: 10
 
@@ -47,7 +47,7 @@ Meaning:
 ## Future Enhancements
 
 ### Future Enhancements
--------------------
+
 - AI-based anomaly detection for worker fatigue/overloading
 - Real-time dashboard for supervisors
 - Automated email/SMS alerts
