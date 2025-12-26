@@ -1,6 +1,7 @@
 # Warehouse Worker Monitoring (Ubuntu
 
-## Project Architecture 
+## Project Architecture
+ 
 Project Structure
 -----------------
 
@@ -17,6 +18,7 @@ Warehouse_Worker_Monitoring/
 └── README.md
 
 ## How to Run the Program
+
 Running the Scanner
 -------------------
 Use this to simulate item scanning:
@@ -30,6 +32,7 @@ Use this to analyze worker workload:
     python3 app/monitor.py
     
 ## Example Output
+
 Sample Output (monitor.py)
 --------------------------
 Scale values: [4, 3, 2, 1]
@@ -42,6 +45,7 @@ Meaning:
 1 = light
 
 ## Future Enhancements
+
 Future Enhancements
 -------------------
 - AI-based anomaly detection for worker fatigue/overloading
