@@ -1,38 +1,44 @@
 from database import get_connection
 from datetime import datetime, timedelta
 
-conn = get_connection()
-cursor = conn.cursor()
+def main():
 
-worker_id = 1
+    conn = get_connection()
+    cursor = conn.cursor()
 
-# Time window: last 15 minutes
-time_window = (datetime.now() - timedelta(minutes=15)).strftime("%Y-%m-%d %H:%M:%S")
+    worker_id = 1
 
-cursor.execute(
-    "SELECT Weight FROM ScanEvent WHERE worker_id = ? AND timestamp >= ?",
-    (worker_id, time_window)
-)
+    # Time window: last 15 minutes
+    time_window = (datetime.now() - timedelta(minutes=15)).strftime("%Y-%m-%d %H:%M:%S")
 
-rows = cursor.fetchall()
+    cursor.execute(
+        "SELECT Weight FROM ScanEvent WHERE worker_id = ? AND timestamp >= ?",
+        (worker_id, time_window)
+    )
 
-scale = []
+    rows = cursor.fetchall()
 
-# Classify weight into categories
-for (weight,) in rows:
-    if weight >= 150:
-        scale.append(4)  # overload
-    elif 100 <= weight < 150:
-        scale.append(3)  # heavy
-    elif 50 <= weight < 100:
-        scale.append(2)  # medium
-    else:
-        scale.append(1)  # light
+    scale = []
 
-# Calculate the total scale score within 15 minutes
-total_load_within_15mins = sum(scale)
+    # Classify weight into categories
+    for (weight,) in rows:
+        if weight >= 150:
+            scale.append(4)  # overload
+        elif 100 <= weight < 150:
+            scale.append(3)  # heavy
+        elif 50 <= weight < 100:
+            scale.append(2)  # medium
+        else:
+            scale.append(1)  # light
 
-print("Scale values:", scale)
-print("Total scale score within 15 mins:", total_load_within_15mins)
+    # Calculate the total scale score within 15 minutes
+    total_load_within_15mins = sum(scale)
 
-conn.close()
+    print("Scale values:", scale)
+    print("Total scale score within 15 mins:", total_load_within_15mins)
+
+    conn.close()
+
+if __name__ == "__main__":
+    print("Scanning now")
+    main()
