@@ -1,6 +1,11 @@
 from flask import Flask, jsonify
 import monitor
 
-app = Flash(__name__)
+app = Flask(__name__)
 
-@app.route("/")
+@app.route("/warehouse")
+def index():
+    return render_templete("index.html")
+
+if __name__ == "__main__":
+    app.run(debug=True)
