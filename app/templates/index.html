@@ -88,23 +88,44 @@
             <div class="stat-value">{{ worker.scan_count }}</div>
         </div>
 
-        {% if worker.scale_values %}
+        {% if worker.scan_events %}
         <div class="stat-box">
-            <div class="stat-label">Recent Scan Weights</div>
-            <p>
-                {% for scale in worker.scale_values %}
-                    {% if scale == 4 %}
-                        <span style="color: #dc3545; font-weight: bold;">Overload</span>
-                    {% elif scale == 3 %}
-                        <span style="color: #ffc107; font-weight: bold;">Heavy</span>
-                    {% elif scale == 2 %}
-                        <span style="color: #17a2b8;">Medium</span>
-                    {% else %}
-                        <span style="color: #28a745;">Light</span>
-                    {% endif %}
-                    {% if not loop.last %} | {% endif %}
-                {% endfor %}
-            </p>
+            <div class="stat-label">Recent Scans (Last 15 mins)</div>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                <thead>
+                    <tr style="background-color: #e9ecef;">
+                        <th style="padding: 10px; text-align: left;">Item ID</th>
+                        <th style="padding: 10px; text-align: left;">Weight (lbs)</th>
+                        <th style="padding: 10px; text-align: left;">Classification</th>
+                        <th style="padding: 10px; text-align: left;">Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for event in worker.scan_events %}
+                    <tr style="border-bottom: 1px solid #dee2e6;">
+                        <td style="padding: 10px;">{{ event.item_id }}</td>
+                        <td style="padding: 10px;">{{ event.weight }}</td>
+                        <td style="padding: 10px;">
+                            {% if event.scale_label == "Overload" %}
+                                <span style="color: #dc3545; font-weight: bold;">⚠️ Overload</span>
+                            {% elif event.scale_label == "Heavy" %}
+                                <span style="color: #ffc107; font-weight: bold;">📦 Heavy</span>
+                            {% elif event.scale_label == "Medium" %}
+                                <span style="color: #17a2b8;">📋 Medium</span>
+                            {% else %}
+                                <span style="color: #28a745;">✓ Light</span>
+                            {% endif %}
+                        </td>
+                        <td style="padding: 10px; font-size: 14px; color: #666;">{{ event.timestamp }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="stat-box">
+            <div class="stat-label">Recent Scans</div>
+            <p style="color: #999; font-style: italic;">No recent scan activity in the last 15 minutes.</p>
         </div>
         {% endif %}
     </div>
