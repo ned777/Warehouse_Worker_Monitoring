@@ -69,6 +69,32 @@
         <h1>Warehouse Worker Monitoring</h1>
         <p>Real-time monitoring dashboard for Worker #{{ worker.worker_id }}</p>
 
+        <!-- Scan Item Form -->
+        <div class="stat-box" style="border-left: 4px solid #28a745;">
+            <div class="stat-label">Scan New Item</div>
+            {% if message %}
+            <div style="padding: 10px; margin: 10px 0; background-color: #d4edda; color: #155724; border-radius: 5px;">
+                {{ message }}
+            </div>
+            {% endif %}
+            <form method="POST" action="/warehouse" style="margin-top: 15px;">
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">Worker ID:</label>
+                    <input type="number" name="worker_id" value="1" required
+                           style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">Item ID:</label>
+                    <input type="number" name="item_id" required placeholder="Enter item ID (e.g., 2210)"
+                           style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px;">
+                </div>
+                <button type="submit"
+                        style="background-color: #28a745; color: white; padding: 12px 30px; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer;">
+                    Scan Item
+                </button>
+            </form>
+        </div>
+
         <div class="stat-box">
             <div class="stat-label">Total Load Score (Last 15 mins)</div>
             <div class="stat-value">{{ worker.total_load }}</div>
