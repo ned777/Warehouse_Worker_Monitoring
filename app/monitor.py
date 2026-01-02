@@ -45,6 +45,48 @@ def get_worker_stats(worker_id=1):
     # Calculate the total scale score within 15 minutes
     total_load_within_15mins = sum(scale)
 
+    # Calculate individual category scores
+    overload_score = scale.count(4) * 4
+    heavy_score = scale.count(3) * 3
+    medium_score = scale.count(2) * 2
+    light_score = scale.count(1) * 1
+
+    # Determine alert status for each category
+    def get_alert_status(score, category):
+        if category == "overload":
+            if score > 8:
+                return {"level": "warning", "message": "Warning: Watch out for this worker not to work too much"}
+            elif score >= 4:
+                return {"level": "normal", "message": "Normal workload"}
+            else:
+                return {"level": "abnormal", "message": "Abnormal - Too little overload work"}
+
+        elif category == "heavy":
+            if score > 9:
+                return {"level": "warning", "message": "Be careful: Too much work"}
+            elif 6 <= score <= 9:
+                return {"level": "normal", "message": "Normal workload"}
+            else:
+                return {"level": "abnormal", "message": "Abnormal - Too little heavy work"}
+
+        elif category == "medium":
+            if score > 12:
+                return {"level": "warning", "message": "Too much: Watch out"}
+            elif 8 <= score <= 12:
+                return {"level": "normal", "message": "Normal workload"}
+            else:
+                return {"level": "abnormal", "message": "Abnormal - Too little medium work"}
+
+        elif category == "light":
+            if score > 20:
+                return {"level": "warning", "message": "Too much work"}
+            elif 14 <= score <= 20:
+                return {"level": "normal", "message": "Normal workload"}
+            else:
+                return {"level": "abnormal", "message": "Not normal - Too little light work"}
+
+        return {"level": "normal", "message": "Normal"}
+
     conn.close()
 
     # Return data as dictionary
@@ -53,7 +95,13 @@ def get_worker_stats(worker_id=1):
         'scale_values': scale,
         'total_load': total_load_within_15mins,
         'scan_count': len(scale),
-        'scan_events': scan_events  # Include detailed scan events
+        'scan_events': scan_events,
+        'category_scores': {
+            'overload': {'score': overload_score, 'alert': get_alert_status(overload_score, "overload")},
+            'heavy': {'score': heavy_score, 'alert': get_alert_status(heavy_score, "heavy")},
+            'medium': {'score': medium_score, 'alert': get_alert_status(medium_score, "medium")},
+            'light': {'score': light_score, 'alert': get_alert_status(light_score, "light")}
+        }
     }
 
 def main():

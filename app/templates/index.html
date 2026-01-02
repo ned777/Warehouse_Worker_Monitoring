@@ -114,6 +114,62 @@
             <div class="stat-value">{{ worker.scan_count }}</div>
         </div>
 
+        <!-- Monitor Analysis Output -->
+        {% if worker.scale_values %}
+        <div class="stat-box" style="border-left: 4px solid #6610f2;">
+            <div class="stat-label">Workload Analysis (Monitor Output)</div>
+            <div style="margin-top: 10px;">
+                <p style="margin: 5px 0;"><strong>Scale Values:</strong> {{ worker.scale_values }}</p>
+                <p style="margin: 5px 0;"><strong>Total Scale Score:</strong> {{ worker.total_load }}</p>
+            </div>
+        </div>
+
+        <!-- Category-Specific Alerts -->
+        <div class="stat-box" style="border-left: 4px solid #ff6b6b;">
+            <div class="stat-label">Category Analysis & Alerts</div>
+
+            <!-- Overload Category -->
+            <div style="margin: 15px 0; padding: 15px; border-radius: 5px;
+                        {% if worker.category_scores.overload.alert.level == 'warning' %}background-color: #fff3cd; border: 2px solid #ffc107;
+                        {% elif worker.category_scores.overload.alert.level == 'abnormal' %}background-color: #f8d7da; border: 2px solid #dc3545;
+                        {% else %}background-color: #d4edda; border: 2px solid #28a745;{% endif %}">
+                <strong>⚠️ Overload Items:</strong>
+                <p style="margin: 5px 0;">Score: {{ worker.category_scores.overload.score }} ({{ worker.scale_values.count(4) }} items × 4)</p>
+                <p style="margin: 5px 0; font-weight: bold;">{{ worker.category_scores.overload.alert.message }}</p>
+            </div>
+
+            <!-- Heavy Category -->
+            <div style="margin: 15px 0; padding: 15px; border-radius: 5px;
+                        {% if worker.category_scores.heavy.alert.level == 'warning' %}background-color: #fff3cd; border: 2px solid #ffc107;
+                        {% elif worker.category_scores.heavy.alert.level == 'abnormal' %}background-color: #f8d7da; border: 2px solid #dc3545;
+                        {% else %}background-color: #d4edda; border: 2px solid #28a745;{% endif %}">
+                <strong>📦 Heavy Items:</strong>
+                <p style="margin: 5px 0;">Score: {{ worker.category_scores.heavy.score }} ({{ worker.scale_values.count(3) }} items × 3)</p>
+                <p style="margin: 5px 0; font-weight: bold;">{{ worker.category_scores.heavy.alert.message }}</p>
+            </div>
+
+            <!-- Medium Category -->
+            <div style="margin: 15px 0; padding: 15px; border-radius: 5px;
+                        {% if worker.category_scores.medium.alert.level == 'warning' %}background-color: #fff3cd; border: 2px solid #ffc107;
+                        {% elif worker.category_scores.medium.alert.level == 'abnormal' %}background-color: #f8d7da; border: 2px solid #dc3545;
+                        {% else %}background-color: #d4edda; border: 2px solid #28a745;{% endif %}">
+                <strong>📋 Medium Items:</strong>
+                <p style="margin: 5px 0;">Score: {{ worker.category_scores.medium.score }} ({{ worker.scale_values.count(2) }} items × 2)</p>
+                <p style="margin: 5px 0; font-weight: bold;">{{ worker.category_scores.medium.alert.message }}</p>
+            </div>
+
+            <!-- Light Category -->
+            <div style="margin: 15px 0; padding: 15px; border-radius: 5px;
+                        {% if worker.category_scores.light.alert.level == 'warning' %}background-color: #fff3cd; border: 2px solid #ffc107;
+                        {% elif worker.category_scores.light.alert.level == 'abnormal' %}background-color: #f8d7da; border: 2px solid #dc3545;
+                        {% else %}background-color: #d4edda; border: 2px solid #28a745;{% endif %}">
+                <strong>✓ Light Items:</strong>
+                <p style="margin: 5px 0;">Score: {{ worker.category_scores.light.score }} ({{ worker.scale_values.count(1) }} items × 1)</p>
+                <p style="margin: 5px 0; font-weight: bold;">{{ worker.category_scores.light.alert.message }}</p>
+            </div>
+        </div>
+        {% endif %}
+
         {% if worker.scan_events %}
         <div class="stat-box">
             <div class="stat-label">Recent Scans (Last 15 mins)</div>
