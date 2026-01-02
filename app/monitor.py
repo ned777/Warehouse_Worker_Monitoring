@@ -1,12 +1,10 @@
 from database import get_connection
 from datetime import datetime, timedelta
 
-def main():
-
+def get_worker_stats(worker_id=1):
+    """Get monitoring statistics for a worker. Returns a dictionary."""
     conn = get_connection()
     cursor = conn.cursor()
-
-    worker_id = 1
 
     # Time window: last 15 minutes
     time_window = (datetime.now() - timedelta(minutes=15)).strftime("%Y-%m-%d %H:%M:%S")
@@ -34,10 +32,22 @@ def main():
     # Calculate the total scale score within 15 minutes
     total_load_within_15mins = sum(scale)
 
-    print("Scale values:", scale)
-    print("Total scale score within 15 mins:", total_load_within_15mins)
-
     conn.close()
+
+    # Return data as dictionary
+    return {
+        'worker_id': worker_id,
+        'scale_values': scale,
+        'total_load': total_load_within_15mins,
+        'scan_count': len(scale)
+    }
+
+def main():
+    """Print monitoring stats to console"""
+    stats = get_worker_stats(worker_id=1)
+
+    print("Scale values:", stats['scale_values'])
+    print("Total scale score within 15 mins:", stats['total_load'])
 
 if __name__ == "__main__":
     print("Scanning now")

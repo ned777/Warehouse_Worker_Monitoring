@@ -20,17 +20,93 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        p {
-            font-size: 18px;
+        .stat-box {
+            background-color: #f8f9fa;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        .stat-label {
+            font-size: 14px;
             color: #666;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+        }
+        .load-indicator {
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .load-low {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .load-medium {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .load-high {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        p {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to Warehouse Worker Monitoring</h1>
-        <p>Your Flask app is working! 🎉</p>
-        <p>This page is being served from your Python Flask server.</p>
+        <h1>Warehouse Worker Monitoring</h1>
+        <p>Real-time monitoring dashboard for Worker #{{ worker.worker_id }}</p>
+
+        <div class="stat-box">
+            <div class="stat-label">Total Load Score (Last 15 mins)</div>
+            <div class="stat-value">{{ worker.total_load }}</div>
+            {% if worker.total_load == 0 %}
+                <div class="load-indicator load-low">No Activity</div>
+            {% elif worker.total_load < 10 %}
+                <div class="load-indicator load-low">Light Load</div>
+            {% elif worker.total_load < 20 %}
+                <div class="load-indicator load-medium">Medium Load</div>
+            {% else %}
+                <div class="load-indicator load-high">Heavy Load</div>
+            {% endif %}
+        </div>
+
+        <div class="stat-box">
+            <div class="stat-label">Items Scanned (Last 15 mins)</div>
+            <div class="stat-value">{{ worker.scan_count }}</div>
+        </div>
+
+        {% if worker.scale_values %}
+        <div class="stat-box">
+            <div class="stat-label">Recent Scan Weights</div>
+            <p>
+                {% for scale in worker.scale_values %}
+                    {% if scale == 4 %}
+                        <span style="color: #dc3545; font-weight: bold;">Overload</span>
+                    {% elif scale == 3 %}
+                        <span style="color: #ffc107; font-weight: bold;">Heavy</span>
+                    {% elif scale == 2 %}
+                        <span style="color: #17a2b8;">Medium</span>
+                    {% else %}
+                        <span style="color: #28a745;">Light</span>
+                    {% endif %}
+                    {% if not loop.last %} | {% endif %}
+                {% endfor %}
+            </p>
+        </div>
+        {% endif %}
     </div>
 </body>
 </html>
