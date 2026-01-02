@@ -92,6 +92,29 @@ Use this to analyze worker workload:
 ```
     python3 app/monitor.py
 ```    
+## Features
+
+### Workload Monitoring
+The system tracks and categorizes scanned items based on weight:
+- **Overload** (≥150 lbs): Heavy-duty items requiring maximum effort
+- **Heavy** (100-149 lbs): Substantial items requiring significant effort
+- **Medium** (50-99 lbs): Moderate items requiring average effort
+- **Light** (<50 lbs): Lightweight items requiring minimal effort
+
+### Category-Specific Alerts
+The monitoring system provides intelligent alerts for each workload category:
+
+**Warning Levels:**
+- **Warning**: Worker is handling too much in this category - intervention recommended
+- **Normal**: Workload is within acceptable range
+- **Abnormal**: Too little activity in this category - potential workflow issue
+
+**Alert Thresholds (15-minute window):**
+- Overload: Normal (4-8), Warning (>8)
+- Heavy: Normal (6-9), Warning (>9)
+- Medium: Normal (8-12), Warning (>12)
+- Light: Normal (14-20), Warning (>20)
+
 ## Example Output
 
 ### Sample Output (monitor.py)
@@ -99,11 +122,11 @@ Use this to analyze worker workload:
 	Scale values: [4, 3, 2, 1]
 	Total scale score within 15 mins: 10
 ```
-Meaning:
-4 = overload
-3 = heavy
-2 = medium
-1 = light
+Scale meanings:
+- 4 = Overload (≥150 lbs)
+- 3 = Heavy (100-149 lbs)
+- 2 = Medium (50-99 lbs)
+- 1 = Light (<50 lbs)
 
 ## Future Enhancements
 
