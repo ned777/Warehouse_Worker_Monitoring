@@ -1,7 +1,7 @@
 # Warehouse Worker Monitoring
 
-**Author:** Ned Nguyen
-**Platform:** Linux (Debian/Ubuntu-based)
+**Author:** Ned Nguyen<br>
+**Platform:** Linux (Debian/Ubuntu-based)<br>
 **Tech Stack:** Python, Flask, SQLite, HTML/CSS
 
 A real-time warehouse worker monitoring system that tracks item scanning activity, analyzes workload, and provides intelligent alerts to prevent worker overload.
