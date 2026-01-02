@@ -128,6 +128,28 @@ Scale meanings:
 - 2 = Medium (50-99 lbs)
 - 1 = Light (<50 lbs)
 
+### Category Alert Examples
+
+**Overload Category:**
+- Score: 12 → **Warning**: Watch out for this worker not to work too much
+- Score: 4 → **Normal**: Normal workload
+- Score: 0 → **Abnormal**: Too little overload work
+
+**Heavy Category:**
+- Score: 12 → **Warning**: Be careful: Too much work
+- Score: 6 → **Normal**: Normal workload
+- Score: 3 → **Abnormal**: Too little heavy work
+
+**Medium Category:**
+- Score: 16 → **Warning**: Too much: Watch out
+- Score: 10 → **Normal**: Normal workload
+- Score: 4 → **Abnormal**: Too little medium work
+
+**Light Category:**
+- Score: 24 → **Warning**: Too much work
+- Score: 14 → **Normal**: Normal workload
+- Score: 7 → **Abnormal**: Not normal - Too little light work
+
 ## Future Enhancements
 
 ### Future Enhancements
