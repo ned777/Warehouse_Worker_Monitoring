@@ -117,12 +117,15 @@ The monitoring system provides intelligent alerts for each workload category:
 
 ## Example Output
 
-### Sample Output (monitor.py)
-```
-	Scale values: [4, 3, 2, 1]
-	Total scale score within 15 mins: 10
-```
-Scale meanings:
+### Web Dashboard Display
+The web interface at `http://localhost:5000/warehouse` shows:
+- **Total Load Score**: Cumulative workload score for last 15 minutes
+- **Items Scanned**: Number of items processed
+- **Workload Analysis**: Real-time scale values and total score
+- **Category Analysis & Alerts**: Color-coded alerts for each weight category
+- **Recent Scans Table**: Detailed list of scanned items with classifications
+
+### Scale System
 - 4 = Overload (≥150 lbs)
 - 3 = Heavy (100-149 lbs)
 - 2 = Medium (50-99 lbs)
@@ -131,24 +134,24 @@ Scale meanings:
 ### Category Alert Examples
 
 **Overload Category:**
-- Score: 12 → **Warning**: Watch out for this worker not to work too much
-- Score: 4 → **Normal**: Normal workload
-- Score: 0 → **Abnormal**: Too little overload work
+- Score >8 → **Warning**: Watch out for this worker not to work too much
+- Score 4-8 → **Normal**: Normal workload
+- Score <4 → **Abnormal**: Too little overload work
 
 **Heavy Category:**
-- Score: 12 → **Warning**: Be careful: Too much work
-- Score: 6 → **Normal**: Normal workload
-- Score: 3 → **Abnormal**: Too little heavy work
+- Score >9 → **Warning**: Be careful: Too much work
+- Score 6-9 → **Normal**: Normal workload
+- Score <6 → **Abnormal**: Too little heavy work
 
 **Medium Category:**
-- Score: 16 → **Warning**: Too much: Watch out
-- Score: 10 → **Normal**: Normal workload
-- Score: 4 → **Abnormal**: Too little medium work
+- Score >12 → **Warning**: Too much: Watch out
+- Score 8-12 → **Normal**: Normal workload
+- Score <8 → **Abnormal**: Too little medium work
 
 **Light Category:**
-- Score: 24 → **Warning**: Too much work
-- Score: 14 → **Normal**: Normal workload
-- Score: 7 → **Abnormal**: Not normal - Too little light work
+- Score >20 → **Warning**: Too much work
+- Score 14-20 → **Normal**: Normal workload
+- Score <14 → **Abnormal**: Not normal - Too little light work
 
 ## Future Enhancements
 
