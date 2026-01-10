@@ -2,7 +2,11 @@
 
 **Author:** Ned Nguyen<br>
 **Platform:** Linux (Debian/Ubuntu-based)<br>
-**Tech Stack:** Python, Flask, SQLite, HTML/CSS
+[![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=flat&logo=python&logoColor=white)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Flask-3.0-000000?style=flat&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
+[![SQLite](https://img.shields.io/badge/SQLite-3-003B57?style=flat&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
+[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 
 A real-time warehouse worker monitoring system that tracks item scanning activity, analyzes workload, and provides intelligent alerts to prevent worker overload.
 
